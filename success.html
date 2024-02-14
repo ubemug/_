@@ -1,0 +1,15 @@
+<html>
+    <body>
+        <h1>Welcome!</h1>
+        <p>Please do not share anything related to this website. When you have clicked on one of the following links, close this tab.</p>
+        <button onclick="web('tbg95.github.io')">TBG95</button>
+        <button onclick="web('games-site.github.io')">games-site</button>
+        <button onclick="web('djblue.github.io/tetris')">Tetris</button>
+        <script>
+            function web(url) {
+                var t = window.open("about:blank", "_blank");
+                t.document.write(`<html><head><title>New Tab</title></head><body style='margin = 0;'><iframe src='https://${url}' style='position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;'></body></html>`)
+            }
+        </script>
+    </body>
+</html>

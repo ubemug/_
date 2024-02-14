@@ -1,0 +1,52 @@
+<html>
+    <body id="body">
+        <button id="start" onclick="start()" type="button" style="font-size: xx-large; border: none; color: red; cursor: not-allowed;">Start!</button>
+        <button id="free" onclick="free()" type="button" style="font-size: xx-large; border: none; color: blue; cursor: pointer;">Free trial! (one time use)</button>
+        <input id="mastertext" type="text" placeholder="" style="font-size: smaller; border: none; color: white; width: 5px; height: 2px;">
+        <button id="master" onclick="master()" type="button" style="font-size: smaller; border: none; color: white;">     </button>
+
+        <script>
+            function start() {
+                if (window.localStorage == undefined || window.localStorage.getItem("hasAccess") == undefined) {
+                    const denied = document.createElement("h1");
+                    denied.style = "font-size: xx-large; color: red;"
+                    const node = document.createTextNode("You do not have access.");
+                    denied.appendChild(node);
+                    document.getElementById("start").remove();
+                    document.getElementById("body").appendChild(denied);
+                    return;
+                }
+                window.location.href = "https://ubemug.github.io/_/success.html"
+            }
+            function free() {
+                if (window.localStorage == undefined || window.localStorage.getItem("usedTrial") == "true") {
+                    const denied = document.createElement("h1");
+                    denied.style = "font-size: xx-large; color: darkred;"
+                    const node = document.createTextNode("You have already used the free trial.");
+                    denied.appendChild(node);
+                    document.getElementById("free").remove()
+                    document.getElementById("body").appendChild(denied);
+                    return;
+                }
+                window.localStorage.setItem("usedTrial", true)
+                window.location.href = "https://ubemug.github.io/_/success.html"
+            }
+            function master() {
+                if (document.getElementById("mastertext").value == "secretMasterPassword") {
+                    window.localStorage.setItem("hasAccess", true);
+                }
+                document.getElementById("master").remove();
+                document.getElementById("mastertext").remove();
+            }
+        </script>
+        <script>
+            if(window.localStorage.getItem("hasAccess") == "true") {
+                document.getElementById("master").remove()
+                document.getElementById("mastertext").remove()
+                document.getElementById("start").style = "font-size: xx-large; border: none; color: blue; cursor: pointer;";
+            } else if (window.localStorage.getItem("usedTrial") == "true") {
+                document.getElementById("free").style = "font-size: xx-large; border: none; color: red; cursor: not-allowed;"
+            }
+        </script>
+    </body>
+</html>
